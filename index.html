@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- 保持原有的meta标签和SEO内容不变 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Play Monster Survivors - the ultimate survival adventure game online. Defeat mythical creatures, collect powerful artifacts and survive the monster apocalypse!">
+    <link rel="canonical" href="https://qifeigame.com/" />
+    <meta name="theme-color" content="#f5f5f7">
+    <title>Monster Survivors | Free Online Survival Adventure Game</title>
+
+    <!-- Tailwind CSS via CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- 优化后的CSS -->
+    <style>
+        .game-wrapper {
+            max-width: 1200px;
+            margin: 0 auto;
+            position: relative;
+            width: 100%;
+        }
+
+        .game-container {
+            width: 100%;
+            background: #000;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+
+        #gameFrame {
+            width: 100%;
+            height: 100%;
+            border: none;
+            display: block;
+        }
+
+        @media (max-width: 768px) {
+            .game-container {
+                border-radius: 12px;
+            }
+        }
+    </style>
+</head>
+<body class="bg-gray-50 text-gray-900 font-sans antialiased">
+    <main class="container mx-auto px-4 py-8">
+        <!-- Header保持原有结构不变 -->
+        <header class="text-center mb-6 md:mb-10">
+            <h1 class="text-4xl md:text-5xl font-bold mb-4 text-gray-900">
+                Monster Survivors
+            </h1>
+            <p class="text-xl md:text-2xl text-gray-600 mb-6 md:mb-8">
+                Survive the Monster Apocalypse in This Thrilling Adventure!
+            </p>
+        </header>
+
+        <!-- 优化后的游戏容器 -->
+        <section class="mb-12">
+            <div class="game-wrapper">
+                <div class="game-container">
+                    <iframe 
+                        id="gameFrame"
+                        src="https://cloud.onlinegames.io/games/2025/unity/monster-survivors/index-og.html" 
+                        allow="autoplay; fullscreen"
+                        loading="eager"
+                        title="Monster Survivors Online Game">
+                    </iframe>
+                </div>
+            </div>
+        </section>
+
+ <!-- Game Description -->
+ <section class="max-w-3xl mx-auto space-y-8">
+    <h2 class="text-2xl font-bold text-gray-900 mb-4">About Monster Survivors</h2>
+    <p class="text-gray-600 leading-relaxed">
+        Monster Survivors is an action-packed survival game where players navigate through post-apocalyptic landscapes filled with dangerous creatures. Collect resources, craft weapons, and team up with other survivors to stay alive in this intense multiplayer adventure.
+    </p>
+
+    <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">Key Features</h2>
+    <ul class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        <li class="flex items-center text-gray-600">
+            <svg class="w-5 h-5 text-blue-500 mr-2" fill="currentColor" viewBox="0 0 20 20">
+                <path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"/>
+            </svg>
+            Multiplayer survival mode
+        </li>
+        <!-- Add more features following the same pattern -->
+    </ul>
+
+    <h2 class="text-2xl font-bold text-gray-900 mt-8 mb-4">How to Play</h2>
+    <p class="text-gray-600 leading-relaxed">
+        Use WASD keys for movement, mouse for aiming and shooting. Collect power-ups and weapons to enhance your survival chances. Team up with other players for better defense against monster waves.
+    </p>
+</section>
+    </main>
+
+    <!-- 优化后的自适应脚本 -->
+    <script>
+        function calculateGameHeight() {
+            const gameWrapper = document.querySelector('.game-wrapper');
+            const gameContainer = document.querySelector('.game-container');
+            const windowWidth = window.innerWidth;
+            const maxWidth = 1200; // 最大容器宽度
+            const baseAspectRatio = 16/9; // 基础宽高比
+            const mobileBreakpoint = 768;
+
+            let effectiveWidth = Math.min(windowWidth * 0.95, maxWidth);
+            let calculatedHeight;
+
+            if (windowWidth <= mobileBreakpoint) {
+                // 移动端全屏处理
+                effectiveWidth = windowWidth - 32; // 减去左右padding
+                calculatedHeight = effectiveWidth * (9/16); // 保持竖屏比例
+                
+                // 限制最大高度
+                const maxHeight = window.innerHeight * 0.7;
+                if (calculatedHeight > maxHeight) {
+                    calculatedHeight = maxHeight;
+                    effectiveWidth = calculatedHeight * (16/9);
+                }
+            } else {
+                // PC端保持16:9比例
+                calculatedHeight = effectiveWidth * (9/16);
+            }
+
+            gameContainer.style.width = `${effectiveWidth}px`;
+            gameContainer.style.height = `${calculatedHeight}px`;
+            gameWrapper.style.height = `${calculatedHeight}px`;
+        }
+
+        // 初始化执行
+        calculateGameHeight();
+        
+        // 添加防抖的resize监听
+        let resizeTimer;
+        window.addEventListener('resize', () => {
+            clearTimeout(resizeTimer);
+            resizeTimer = setTimeout(() => {
+                calculateGameHeight();
+            }, 200);
+        });
+
+        // 游戏加载后再次检查尺寸
+        document.getElementById('gameFrame').addEventListener('load', () => {
+            setTimeout(calculateGameHeight, 1000);
+        });
+    </script>
+</body>
+</html>
